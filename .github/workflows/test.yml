@@ -1,0 +1,23 @@
+name: Build and Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show available simulators
+        run: xcrun simctl list devices available
+
+      # If "iPhone 16" isn't in the list printed by the step above, swap in
+      # whatever IS listed there — available simulator names shift over time
+      # on GitHub's runner images.
+      - name: Build and test (iOS Simulator)
+        run: |
+          xcodebuild test \
+            -scheme ReceiptScannerKit \
+            -destination 'platform=iOS Simulator,name=iPhone 16'
