@@ -9,7 +9,7 @@
 import SwiftUI
 import UIKit
 
-struct ReceiptScanTestView: View {
+public struct ReceiptScanTestView: View {
     @State private var isShowingScanner = false
     @State private var isProcessing = false
     @State private var parsedReceipt: ParsedReceipt?
@@ -17,7 +17,12 @@ struct ReceiptScanTestView: View {
 
     private let scanner = ReceiptScanner(classifier: KeywordCategoryClassifier())
 
-    var body: some View {
+    // Explicit public init is required — Swift never auto-generates a public
+    // initializer even for a public type, only internal ones. Without this,
+    // external code could see the type but never actually construct it.
+    public init() {}
+
+    public var body: some View {
         NavigationStack {
             content
                 .navigationTitle("Receipt Scan Test")
