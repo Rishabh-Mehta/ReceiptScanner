@@ -7,7 +7,7 @@ let package = Package(
         .iOS(.v17)
     ],
     products: [
-        .library(name: "ReceiptScannerKit", targets: ["ReceiptScannerKit"])
+        .library(name: "ReceiptScannerKit", type: .static, targets: ["ReceiptScannerKit"])
     ],
     targets: [
         .target(
